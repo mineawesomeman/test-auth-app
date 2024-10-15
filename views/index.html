@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home Page</title>
+        <script src="/js/home-page.js"></script>
+    </head>
+    <body>
+        <h1>This is a sample homepage</h1>
+        <p>Here is what you can do:</p>
+        <ul>
+            <li>Login <a href="/login">Here</a></li>
+            <li>Logout <a href="/logout">Here</a></li>
+            <li>Check who you are logged in as <button id="check-login">Click me</button> <span id="check-login-output"></span></li>
+            <li>Look at sample page 1 <a href="/page-1">Here</a></li>
+            <li>Look at sample page 2 <a href="/page-2">Here</a></li>
+        </ul>
+        <p>Sample page 1 will show one version of a page to most users, but show version 2 when userA is logged in</p>
+        <p>Sample page 2 will only show when userA is logged in, will 401 unauthorized otherwise</p>
+    </body>
+</html>
