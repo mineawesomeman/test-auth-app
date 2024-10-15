@@ -54,6 +54,29 @@ app.get("/logout", (req: Request, res: Response) => {
     }
 });
 
+app.get("/page-1", (req: Request, res: Response) => {
+    //if the user is userA, then we serve them page1.dev.html
+    //otherwise we serve them page1.html
+    if (req.session?.user?.username == "userA") {
+        res.sendFile(path.join(__dirname, "/views/page1.dev.html"));
+    } else {
+        res.sendFile(path.join(__dirname, "/views/page1.html"));
+    }
+})
+
+app.get("/page-2", (req: Request, res: Response) => {
+    //if the user is userA, then we serve them page2.dev.html
+    //otherwise we give them an error
+    //this behavior can change to be "404 - Page not Found" or redirecting back to the homepage based on preference
+    //its more to show you that you can kinda do whatever you want here
+    if (req.session?.user?.username == "userA") {
+        res.sendFile(path.join(__dirname, "/views/page2.dev.html"));
+    } else {
+        res.status(401).end("Unauthorized");
+    }
+})
+
+
 //this endpoint is not for sending a webpage, rather it sends JSON. if you look at code for the home page (in home-page.js)
 //it calls this endpoint when you press the button to check the user
 app.get("/user-info", (req: Request, res: Response) => {
