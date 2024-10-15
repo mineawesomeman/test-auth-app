@@ -10,5 +10,11 @@ async function logout() {
             "Content-Type": "application/json"
         },
         method: "POST",
-    }).then(() => window.location.replace("/"));
+    }).then((res) => {
+        if (res.ok) {
+            window.location.replace("/");
+        } else {
+            alert("unable to logout");
+        }
+    });
 }

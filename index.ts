@@ -31,9 +31,10 @@ app.get("/", (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, "/views/index.html")); 
     //this is the easiest way to just send a webpage. 
     //if you want something more powerful, look up "express render"
-    //you can also just put them in your static folder too, which is what I did for the login and logout pages
+    //you can also just put them in your static folder too
 });
 
+//login page
 app.get("/login", (req: Request, res: Response) => {
     //if the user is logged in, the server will redirect you to the homepage
     //otherwise it will send you the page to log in
@@ -44,6 +45,7 @@ app.get("/login", (req: Request, res: Response) => {
     }
 });
 
+//logout page
 app.get("/logout", (req: Request, res: Response) => {
     //if the user isnt logged in, the server will redirect you to the homepage
     //otherwise it will send you the page to log out
@@ -54,6 +56,7 @@ app.get("/logout", (req: Request, res: Response) => {
     }
 });
 
+//sample page 1
 app.get("/page-1", (req: Request, res: Response) => {
     //if the user is userA, then we serve them page1.dev.html
     //otherwise we serve them page1.html
@@ -64,6 +67,7 @@ app.get("/page-1", (req: Request, res: Response) => {
     }
 })
 
+//sample page 2
 app.get("/page-2", (req: Request, res: Response) => {
     //if the user is userA, then we serve them page2.dev.html
     //otherwise we give them an error
@@ -86,6 +90,7 @@ app.get("/user-info", (req: Request, res: Response) => {
 });
 
 //this is the function that actually logs in the user
+//anything with post is usually a request from the webpage, not a request *for* a webpage
 app.post("/login-user", (req: Request, res: Response) => {
     //this is where you would authenticate the user
     //but here im just checking what string is "user" in the body
@@ -97,7 +102,7 @@ app.post("/login-user", (req: Request, res: Response) => {
             } else {
                 req.session = {user: {name: "userA", username: "userA"}};
             }
-            res.json({name: "userA", username: "userA"});
+            res.json({name: "userA", username: "userA"}); // this response doesn't rlly matter, cause if the response is 200, the webpage will redirect
         }
         else if (req.body.user == "userB") {
             if (req.session) {
@@ -105,7 +110,7 @@ app.post("/login-user", (req: Request, res: Response) => {
             } else {
                 req.session = {user: {name: "userB", username: "userB"}};
             }
-            res.redirect("/");
+            res.json({name: "userB", username: "userB"});
         } else {
             //input checking
             res.status(400).end("Invalid Input");

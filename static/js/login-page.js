@@ -16,5 +16,11 @@ async function login(user) {
         },
         method: "POST",
         body: JSON.stringify(body)
-    }).then(() => window.location.replace("/"));
+    }).then((res) => {
+        if (res.ok) {
+            window.location.replace("/");
+        } else {
+            alert("unable to login");
+        }
+    });
 }
